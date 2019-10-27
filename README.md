@@ -1,24 +1,5 @@
-# README
+Simple TODO-list application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[ER-диаграмма](https://drive.google.com/file/d/1TxVgdb3CqRfR3zHrNd7S3paKHH5Kz8sv/view?usp=sharing)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Deploy on Heroku](https://whispering-shelf-09711.herokuapp.com)
