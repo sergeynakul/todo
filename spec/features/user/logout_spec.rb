@@ -7,14 +7,11 @@ feature 'User can logout', "
 " do
   given(:user) { create :user }
 
-  background { visit new_user_session_path }
+  background { login(user) }
 
   scenario 'Authenticated user tries to logout' do
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
     click_on 'Logout'
 
-    expect(page).to have_content 'Signed out successfully.'
+    expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 end

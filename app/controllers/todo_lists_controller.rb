@@ -1,8 +1,9 @@
 class TodoListsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_todo_list, only: %i[show edit update destroy]
 
   def index
-    @todo_lists = TodoList.all
+    @todo_lists = current_user.todo_lists
   end
 
   def show; end
@@ -14,9 +15,9 @@ class TodoListsController < ApplicationController
   def edit; end
 
   def create
-    @todo_list = TodoList.new(todo_list_params)
+    @todo_list = current_user.todo_lists.new(todo_list_params)
     if @todo_list.save
-      redirect_to @todo_list
+      redirect_to @todo_list, notice: 'Todo List successfully created.'
     else
       render :new
     end

@@ -1,0 +1,12 @@
+<%= form_with model: @todo_list, local: true do |form| %>
+  <%= render 'shared/errors', resource: @todo_list %>
+
+  <p>
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :todo_list_title %>
+  </p>
+
+  <p><%= form.submit %></p>
+<% end %>
+
+<p><%= link_to 'Back', todo_lists_path %></p>

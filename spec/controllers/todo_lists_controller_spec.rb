@@ -1,15 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe TodoListsController, type: :controller do
+  let(:user) { create :user }
   let(:todo_list) { create :todo_list }
 
+  before { log_in(user) }
+
   describe 'GET #index' do
-    let(:todo_lists) { create_list(:todo_list, 3) }
+    let(:todo_lists) { create_list(:todo_list, 3, user: user) }
 
     before { get :index }
 
     it 'populates an array of all todo lists' do
-      expect(assigns(:todo_lists)).to match_array(todo_lists)
+      expect(assigns(:todo_lists)).to match_array(user.todo_lists)
     end
 
     it 'renders index' do
@@ -59,9 +62,14 @@ RSpec.describe TodoListsController, type: :controller do
         expect { post :create, params: { todo_list: attributes_for(:todo_list) } }.to change(TodoList, :count).by(1)
       end
 
-      it 'redirects to new todo_list' do
+      it 'redirects to new todo list' do
         post :create, params: { todo_list: attributes_for(:todo_list) }
         expect(response).to redirect_to assigns(:todo_list)
+      end
+
+      it 'created todo list belongs to current_user' do
+        post :create, params: { todo_list: attributes_for(:todo_list) }
+        expect(assigns(:todo_list).user).to eq user
       end
     end
 
