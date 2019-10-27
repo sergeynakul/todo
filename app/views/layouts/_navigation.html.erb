@@ -1,0 +1,10 @@
+<nav class="navbar navbar-light bg-light mb-3">
+  <%= link_to 'TODO lists', root_path, class: 'navbar-brand' %>
+  <span class="navbar-text">
+    <% if user_signed_in? %>
+      Welcome <%= current_user.email %> | <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Login', new_user_session_path %> | <%= link_to 'Registration', new_user_registration_path %>
+    <% end %>
+  </span>
+</nav>

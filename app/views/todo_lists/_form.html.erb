@@ -1,12 +1,20 @@
-<%= form_with model: @todo_list, local: true do |form| %>
-  <%= render 'shared/errors', resource: @todo_list %>
+<div class="card border-primary">
+  <div class="card-body">
+    <%= form_with model: @todo_list, local: true do |form| %>
+      <div class="form-group">
+        <%= render 'shared/errors', resource: @todo_list %>
 
-  <p>
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :todo_list_title %>
-  </p>
+        <p>
+          <%= form.label :title %>
+          <%= form.text_field :title, id: :todo_list_title, autofocus: true, class: 'form-control', placeholder: 'Enter title' %>
+        </p>
 
-  <p><%= form.submit %></p>
-<% end %>
+        <p><%= form.submit 'Create', class: 'btn btn-primary' %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<p><%= link_to 'Back', todo_lists_path %></p>
+<div class="mt-1">
+  <%= link_to 'Back', todo_lists_path %>
+</div>

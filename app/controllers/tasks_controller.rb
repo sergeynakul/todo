@@ -21,7 +21,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to @task
+      redirect_to @task, notice: 'Task successfully updated.'
     else
       render :edit
     end
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to todo_list_path(@task.todo_list)
+    redirect_to todo_list_path(@task.todo_list), notice: 'Task successfully deleted.'
   end
 
   private
