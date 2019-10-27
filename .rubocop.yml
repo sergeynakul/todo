@@ -8,7 +8,7 @@ Style/MixinUsage:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 145
+  Max: 155
 
 Metrics/BlockLength:
   Max: 100
