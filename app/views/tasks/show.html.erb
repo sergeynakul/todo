@@ -1,0 +1,16 @@
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>Expiration time:</strong>
+  <%= @task.expiration_time %>
+</p>
+
+<p>
+  <strong>TODO list:</strong>
+  <%= @task.todo_list.title %>
+</p>
+
+<p><%= link_to 'Back', todo_list_path(@task.todo_list) %></p>

@@ -11,7 +11,7 @@ RSpec.describe TodoListsController, type: :controller do
 
     before { get :index }
 
-    it 'populates an array of all todo lists' do
+    it 'populates an array of users todo lists' do
       expect(assigns(:todo_lists)).to match_array(user.todo_lists)
     end
 
@@ -29,6 +29,10 @@ RSpec.describe TodoListsController, type: :controller do
 
     it 'renders show' do
       expect(response).to render_template :show
+    end
+
+    it 'populates an array of todo list tasks' do
+      expect(assigns(:tasks)).to match_array(todo_list.tasks)
     end
   end
 
@@ -59,7 +63,7 @@ RSpec.describe TodoListsController, type: :controller do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves a new todo list in the database' do
-        expect { post :create, params: { todo_list: attributes_for(:todo_list) } }.to change(TodoList, :count).by(1)
+        expect { post :create, params: { todo_list: attributes_for(:todo_list) } }.to change(user.todo_lists, :count).by(1)
       end
 
       it 'redirects to new todo list' do
@@ -118,6 +122,11 @@ RSpec.describe TodoListsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:todo_list) { create :todo_list }
+
+    it 'assigns the requested todo list to @todo_list' do
+      delete :destroy, params: { id: todo_list }
+      expect(assigns(:todo_list)).to eq todo_list
+    end
 
     it 'deletes the todo list' do
       expect { delete :destroy, params: { id: todo_list } }.to change(TodoList, :count).by(-1)

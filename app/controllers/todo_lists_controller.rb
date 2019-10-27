@@ -1,12 +1,13 @@
 class TodoListsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_todo_list, only: %i[show edit update destroy]
 
   def index
     @todo_lists = current_user.todo_lists
   end
 
-  def show; end
+  def show
+    @tasks = @todo_list.tasks
+  end
 
   def new
     @todo_list = TodoList.new

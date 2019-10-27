@@ -2,5 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'todo_lists#index'
 
-  resources :todo_lists
+  resources :todo_lists do
+    resources :tasks, shallow: true, except: :index
+  end
 end

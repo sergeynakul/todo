@@ -1,0 +1,15 @@
+<%= form_with model: [@todo_list, @task], local: true do |form| %>
+  <%= render 'shared/errors', resource: @task %>
+
+  <p>
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :task_description %>
+  </p>
+
+  <p>
+    <%= form.label :expiration_time %>
+    <%= form.datetime_field :expiration_time, id: :task_expiration_time %>
+  </p>
+
+  <p><%= form.submit %></p>
+<% end %>

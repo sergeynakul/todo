@@ -5,7 +5,7 @@ feature 'User can create todo list', "
   as user
   I'd like to be able to create todo list
 " do
-  given(:user) { create(:user) }
+  given(:user) { create :user }
 
   describe 'Authenticated user tries to create todo list' do
     background do

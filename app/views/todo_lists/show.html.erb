@@ -1,3 +1,5 @@
-<p><%= @todo_list.title %></p>
+<h1><%= @todo_list.title %></h1>
+
+<%= render 'tasks/index' %>
 
 <p><%= link_to 'Back', todo_lists_path %></p>
