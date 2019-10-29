@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe TodoListsController, type: :controller do
-  let(:user) { create :user }
-  let(:todo_list) { create :todo_list }
+  let(:user) { create(:user) }
+  let(:todo_list) { create(:todo_list, user: user) }
 
   before { log_in(user) }
 
@@ -121,7 +121,7 @@ RSpec.describe TodoListsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:todo_list) { create :todo_list }
+    let!(:todo_list) { create(:todo_list, user: user) }
 
     it 'assigns the requested todo list to @todo_list' do
       delete :destroy, params: { id: todo_list }
