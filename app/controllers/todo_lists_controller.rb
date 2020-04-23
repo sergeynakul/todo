@@ -1,5 +1,6 @@
 class TodoListsController < ApplicationController
   before_action :set_todo_list, only: %i[show edit update destroy]
+  before_action :check_author, only: %i[show edit update destroy]
 
   def index
     @todo_lists = current_user.todo_lists
@@ -41,6 +42,10 @@ class TodoListsController < ApplicationController
 
   def set_todo_list
     @todo_list = TodoList.find(params[:id])
+  end
+
+  def check_author
+    redirect_to root_path, alert: 'You are not author' unless current_user.author?(@todo_list)
   end
 
   def todo_list_params

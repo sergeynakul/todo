@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_todo_list, only: %i[new create]
   before_action :set_task, only: %i[show edit update destroy]
+  before_action :check_author, only: %i[show edit update destroy]
 
   def show; end
 
@@ -40,6 +41,10 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def check_author
+    redirect_to root_path, alert: 'You are not author' unless current_user.author?(@task.todo_list)
   end
 
   def task_params

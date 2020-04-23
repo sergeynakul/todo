@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
   let(:user) { create :user }
-  let(:todo_list) { create :todo_list }
-  let(:task) { create :task }
+  let(:todo_list) { create(:todo_list, user: user) }
+  let!(:task) { create(:task, todo_list: todo_list) }
 
   before { log_in(user) }
 
@@ -113,8 +113,6 @@ RSpec.describe TasksController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:task) { create :task }
-
     it 'assigns the requested task in @task' do
       delete :destroy, params: { id: task }
       expect(assigns(:task)).to eq task

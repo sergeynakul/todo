@@ -6,7 +6,7 @@ feature 'User can create task', "
   I'd like to be able to create task
 " do
   given(:user) { create :user }
-  given(:todo_list) { create :todo_list }
+  given(:todo_list) { create(:todo_list, user: user) }
 
   describe 'Authenticated user tries to create task' do
     background do
