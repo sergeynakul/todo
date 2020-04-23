@@ -41,6 +41,7 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+    redirect_to todo_lists_path, alert: 'You do not have access to this resource.' unless current_user.author?(@task.todo_list)
   end
 
   def check_author
