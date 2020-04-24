@@ -14,6 +14,13 @@
           <%= form.datetime_field :expiration_time, id: :task_expiration_time, class: 'form-control' %>
         </p>
 
+        <% if @task.persisted? %>
+          <p>
+            <%= form.label :done %>
+            <%= form.check_box :done %>
+          </p>
+        <% end %>
+
         <p><%= form.submit class: 'btn btn-primary' %></p>
       </div>
     <% end %>
