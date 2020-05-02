@@ -1,0 +1,6 @@
+$('.flash').html('<%= j render partial: 'shared/flash', flash: notice %>');
+$('.errors').html('<%= j render 'shared/errors', resource: @todo_list %>');
+
+<% if !@todo_list.errors.present? %>
+  $('tr[data-todo-list-id="' + <%= @todo_list.id %> + '"]').replaceWith('<%= j render @todo_list %>');
+<% end %>

@@ -1,6 +1,11 @@
-<tr>
-  <td><%= todo_list.title %></td>
-  <td><%= link_to 'Show', todo_list_path(todo_list) %></td>
-  <td><%= link_to 'Edit', edit_todo_list_path(todo_list) %></td>
-  <td><%= link_to 'Delete', todo_list_path(todo_list), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
+<%= content_tag :tr, data: { todo_list_id: todo_list.id } do %>
+  <td class="align-middle">
+    <%= content_tag :span, todo_list.title, class: 'todo-list-title', data: { todo_list_id: todo_list.id } %>
+    <%= render 'todo_lists/form_inline', todo_list: todo_list == @todo_list ? @todo_list : todo_list %>
+  </td>
+  <td class="align-middle"><%= link_to 'Show', todo_list_path(todo_list) %></td>
+  <td class="align-middle">
+    <%= link_to 'Edit', edit_todo_list_path(todo_list), data: { todo_list_id: todo_list.id }, class: 'form-inline-link' %>
+  </td>
+  <td class="align-middle"><%= link_to 'Delete', todo_list_path(todo_list), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
+<% end %>

@@ -1,0 +1,2 @@
+$('.flash').html('<%= j render partial: 'shared/flash', flash: notice %>');
+$('tr[data-todo-list-id="' + <%= @todo_list.id %> + '"]').remove();

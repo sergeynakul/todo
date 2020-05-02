@@ -1,0 +1,6 @@
+<%= form_with model: todo_list,
+              class: todo_list.persisted? ? 'form-inline form-inline-update hide' : 'form-inline form-inline-create',
+              data: { todo_list_id: todo_list.id } do |form| %>
+  <%= form.text_field :title, class: 'form-control mb-2 mr-sm-2', placeholder: 'Todo list title' %>
+  <%= form.submit class: 'btn btn-primary mb-2' %>
+<% end %>

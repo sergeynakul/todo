@@ -43,7 +43,7 @@ feature 'User can edit task', "
       click_on 'Logout'
       login(other_user)
       visit todo_list_path(todo_list)
-      
+
       expect(page).to_not have_link 'Edit'
     end
   end

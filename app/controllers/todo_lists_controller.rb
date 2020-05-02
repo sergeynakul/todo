@@ -1,41 +1,28 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: %i[show edit update destroy]
-  before_action :check_author, only: %i[show edit update destroy]
+  before_action :set_todo_list, only: %i[show update destroy]
+  before_action :check_author, only: %i[show update destroy]
 
   def index
     @todo_lists = current_user.todo_lists
+    @todo_list = TodoList.new
   end
 
   def show
     @tasks = @todo_list.tasks
   end
 
-  def new
-    @todo_list = TodoList.new
-  end
-
-  def edit; end
-
   def create
     @todo_list = current_user.todo_lists.new(todo_list_params)
-    if @todo_list.save
-      redirect_to @todo_list, notice: 'Todo List successfully created.'
-    else
-      render :new
-    end
+    flash.now[:notice] = 'Todo List successfully created.' if @todo_list.save
   end
 
   def update
-    if @todo_list.update(todo_list_params)
-      redirect_to @todo_list, notice: 'Todo List successfully updated.'
-    else
-      render :edit
-    end
+    flash.now[:notice] = 'Todo List successfully updated.' if @todo_list.update(todo_list_params)
   end
 
   def destroy
     @todo_list.destroy
-    redirect_to todo_lists_path, notice: 'Todo List successfully deleted.'
+    flash.now[:notice] = 'Todo List successfully deleted.'
   end
 
   private

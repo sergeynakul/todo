@@ -36,55 +36,31 @@ RSpec.describe TodoListsController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
-    before { get :new }
-
-    it 'assigns a new todo list in @todo_list' do
-      expect(assigns(:todo_list)).to be_a_new(TodoList)
-    end
-
-    it 'renders new' do
-      expect(response).to render_template :new
-    end
-  end
-
-  describe 'GET #edit' do
-    before { get :edit, params: { id: todo_list } }
-
-    it 'assigns the requested todo list in @todo_list' do
-      expect(assigns(:todo_list)).to eq todo_list
-    end
-
-    it 'renders edit' do
-      expect(response).to render_template :edit
-    end
-  end
-
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves a new todo list in the database' do
-        expect { post :create, params: { todo_list: attributes_for(:todo_list) } }.to change(user.todo_lists, :count).by(1)
+        expect { post :create, params: { todo_list: attributes_for(:todo_list) }, format: :js }.to change(user.todo_lists, :count).by(1)
       end
 
-      it 'redirects to new todo list' do
-        post :create, params: { todo_list: attributes_for(:todo_list) }
-        expect(response).to redirect_to assigns(:todo_list)
+      it 'renders template create' do
+        post :create, params: { todo_list: attributes_for(:todo_list), format: :js }
+        expect(response).to render_template :create
       end
 
       it 'created todo list belongs to current_user' do
-        post :create, params: { todo_list: attributes_for(:todo_list) }
+        post :create, params: { todo_list: attributes_for(:todo_list), format: :js }
         expect(assigns(:todo_list).user).to eq user
       end
     end
 
     context 'with invalid attributes' do
       it 'does not save a new todo list in the database' do
-        expect { post :create, params: { todo_list: attributes_for(:todo_list, :invalid) } }.to_not change(TodoList, :count)
+        expect { post :create, params: { todo_list: attributes_for(:todo_list, :invalid) }, format: :js }.to_not change(TodoList, :count)
       end
 
-      it 're-renders new' do
-        post :create, params: { todo_list: attributes_for(:todo_list, :invalid) }
-        expect(response).to render_template :new
+      it 'renders template create' do
+        post :create, params: { todo_list: attributes_for(:todo_list, :invalid), format: :js }
+        expect(response).to render_template :create
       end
     end
   end
@@ -92,30 +68,30 @@ RSpec.describe TodoListsController, type: :controller do
   describe 'PATCH #update' do
     context 'with valid attributes' do
       it 'assigns the requested todo list to @todo_list' do
-        patch :update, params: { id: todo_list, todo_list: attributes_for(:todo_list) }
+        patch :update, params: { id: todo_list, todo_list: attributes_for(:todo_list), format: :js }
         expect(assigns(:todo_list)).to eq todo_list
       end
 
       it 'changes todo list' do
-        patch :update, params: { id: todo_list, todo_list: { title: 'new title' } }
+        patch :update, params: { id: todo_list, todo_list: { title: 'new title' }, format: :js }
         todo_list.reload
         expect(todo_list.title).to eq 'new title'
       end
 
       it 'redirects to updated todo list' do
-        patch :update, params: { id: todo_list, todo_list: { title: 'new title' } }
+        patch :update, params: { id: todo_list, todo_list: { title: 'new title' }, format: :js }
         expect(response).to redirect_to assigns(:todo_list)
       end
     end
 
     context 'with invalid attributes' do
       it 'does not changes todo list' do
-        expect { patch :update, params: { id: todo_list, todo_list: attributes_for(:todo_list, :invalid) } }.to_not change(todo_list, :title)
+        expect { patch :update, params: { id: todo_list, todo_list: attributes_for(:todo_list, :invalid), format: :js } }.to_not change(todo_list, :title)
       end
 
-      it 're-renders edit' do
-        patch :update, params: { id: todo_list, todo_list: attributes_for(:todo_list, :invalid) }
-        expect(response).to render_template :edit
+      it 'renders template update' do
+        patch :update, params: { id: todo_list, todo_list: attributes_for(:todo_list, :invalid), format: :js }
+        expect(response).to render_template :update
       end
     end
   end
@@ -124,17 +100,17 @@ RSpec.describe TodoListsController, type: :controller do
     let!(:todo_list) { create(:todo_list, user: user) }
 
     it 'assigns the requested todo list to @todo_list' do
-      delete :destroy, params: { id: todo_list }
+      delete :destroy, params: { id: todo_list, format: :js }
       expect(assigns(:todo_list)).to eq todo_list
     end
 
     it 'deletes the todo list' do
-      expect { delete :destroy, params: { id: todo_list } }.to change(TodoList, :count).by(-1)
+      expect { delete :destroy, params: { id: todo_list, format: :js } }.to change(TodoList, :count).by(-1)
     end
 
-    it 'redirects to index' do
-      delete :destroy, params: { id: todo_list }
-      expect(response).to redirect_to todo_lists_path
+    it 'renders template destroy' do
+      delete :destroy, params: { id: todo_list, format: :js }
+      expect(response).to render_template :destroy
     end
   end
 end
