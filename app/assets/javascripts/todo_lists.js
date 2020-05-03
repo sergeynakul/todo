@@ -19,6 +19,7 @@ function formInlineHandler(todoListId) {
   var link = document.querySelector('.form-inline-link[data-todo-list-id="'  + todoListId + '"]')
   var todoListTitle = document.querySelector('.todo-list-title[data-todo-list-id="'  + todoListId + '"]')
   var formInline = document.querySelector('.form-inline-update[data-todo-list-id="'  + todoListId + '"]')
+  var resourceErrors = document.querySelector('.resource-errors[data-resource-id="'  + todoListId + '"]')
   
   if (formInline && formInline.classList.contains('hide')) {
     todoListTitle.classList.add('hide')
@@ -27,6 +28,7 @@ function formInlineHandler(todoListId) {
   } else {
     todoListTitle.classList.remove('hide')
     formInline.classList.add('hide')
+    if (resourceErrors) resourceErrors.classList.add('hide')
     link.textContent = 'Edit'
   }
 }

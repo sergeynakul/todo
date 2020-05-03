@@ -1,14 +1,11 @@
 <h2>Tasks</h2>
 
-<p><%= link_to 'Create task', new_todo_list_task_path(@todo_list) %></p>
+<div class="create-errors">
+  <%= render 'shared/errors', resource: @task %>
+</div>
 
-<table class="table">
-  <tr>
-    <th>Description</th>
-    <th>Expiration time</th>
-    <th>Done</th>
-    <th colspan="3">Actions</th>
-  </tr>
+<%= render 'tasks/form_inline', task: @task %>
 
+<div class='tasks'>
   <%= render @tasks %>
-</table>
+</div>

@@ -1,0 +1,6 @@
+$('.flash').html('<%= j render partial: 'shared/flash', flash: notice %>');
+$('.errors[data-task-id="' + <%= @task.id %> + '"]').html('<%= j render 'shared/errors', resource: @task %>');
+
+<% if !@task.errors.present? %>
+  $('.task[data-task-id="' + <%= @task.id %> + '"]').replaceWith('<%= j render @task %>');
+<% end %>

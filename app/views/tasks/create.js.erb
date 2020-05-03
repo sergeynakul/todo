@@ -1,0 +1,8 @@
+$('.flash').html('<%= j render partial: 'shared/flash', flash: notice %>');
+$('.create-errors').html('<%= j render 'shared/errors', resource: @task %>');
+
+<% if @task.persisted? %>
+  $(".tasks").append("<%= j render @task %>");
+  $("#task_description").val("");
+  $("#task_expiration_time").val("");
+<% end %>

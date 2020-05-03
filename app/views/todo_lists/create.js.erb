@@ -1,7 +1,7 @@
 $('.flash').html('<%= j render partial: 'shared/flash', flash: notice %>');
-$('.errors').html('<%= j render 'shared/errors', resource: @todo_list %>');
+$('.create-errors').html('<%= j render 'shared/errors', resource: @todo_list %>');
 
 <% if @todo_list.persisted? %>
-  $(".table:last-child").append("<%= j render @todo_list %>");
+  $('.table > tbody').append("<%= j render @todo_list %>");
   $("#todo_list_title").val("");
 <% end %>

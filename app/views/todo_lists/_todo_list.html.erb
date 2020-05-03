@@ -5,7 +5,7 @@
   </td>
   <td class="align-middle"><%= link_to 'Show', todo_list_path(todo_list) %></td>
   <td class="align-middle">
-    <%= link_to 'Edit', edit_todo_list_path(todo_list), data: { todo_list_id: todo_list.id }, class: 'form-inline-link' %>
+    <%= link_to 'Edit', '#', data: { todo_list_id: todo_list.id }, class: 'form-inline-link' %>
   </td>
   <td class="align-middle"><%= link_to 'Delete', todo_list_path(todo_list), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
 <% end %>

@@ -9,6 +9,7 @@ class TodoListsController < ApplicationController
 
   def show
     @tasks = @todo_list.tasks
+    @task = Task.new
   end
 
   def create
@@ -21,8 +22,7 @@ class TodoListsController < ApplicationController
   end
 
   def destroy
-    @todo_list.destroy
-    flash.now[:notice] = 'Todo List successfully deleted.'
+    flash.now[:notice] = 'Todo List successfully deleted.' if @todo_list.destroy
   end
 
   private

@@ -1,0 +1,2 @@
+$('.flash').html('<%= j render partial: 'shared/flash', flash: notice %>');
+$('.task[data-task-id="' + <%= @task.id %> + '"]').remove();

@@ -1,0 +1,15 @@
+<%= content_tag :div, class: 'errors', data: { task_id: task.id } do %>
+  <%= render 'shared/errors', resource: @task %>
+<% end %>
+<%= form_with model: task.persisted? ? task : [@todo_list, task],
+              class: task.persisted? ? 'form-inline form-inline-update hide' : 'form-inline form-inline-create',
+              data: { task_id: task.id } do |form| %>
+  <%= form.text_area :description, class: 'form-control mb-2 mr-sm-2', placeholder: 'Description', cols: "60" %>
+  <%= form.label :expiration_time, 'Deadline', class: "my-1 mr-2" %>
+  <%= form.datetime_field :expiration_time, class: 'form-control mb-2 mr-sm-2' %>
+  <% if task.persisted? %>
+    <%= form.label :done, class: "form-check-label mr-2" %>
+    <%= form.check_box :done, class: "form-check-input mr-2" %>
+  <% end %>
+  <%= form.submit class: 'btn btn-primary mb-2' %>
+<% end %>

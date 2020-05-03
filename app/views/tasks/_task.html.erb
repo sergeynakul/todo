@@ -1,8 +1,10 @@
-<tr>
-  <td><%= task.description %></td>
-  <td><%= task.expiration_time %></td>
-  <td><%= task.done %></td>
-  <td><%= link_to 'Show', task_path(task) %></td>
-  <td><%= link_to 'Edit', edit_task_path(task) %></td>
-  <td><%= link_to 'Delete', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
+<%= content_tag :div, class: 'task border border-primary rounded mb-2 p-2', data: { task_id: task.id } do %>
+  <%= content_tag :div, class: 'task_inner', data: { task_id: task.id } do %>
+    <p>Description: <%= task.description %></p>
+    <p>Deadline: <%= task.expiration_time %></p>
+    <p>Done? <%= task.done %></p>
+  <% end %>
+  <%= render 'tasks/form_inline', task: task == @task ? @task : task %>
+  <%= link_to 'Edit', '#', data: { task_id: task.id }, class: 'form-inline-link' %> | 
+  <%= link_to 'Delete', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+<% end %>

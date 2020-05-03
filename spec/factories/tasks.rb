@@ -1,7 +1,11 @@
 FactoryBot.define do
+  sequence :description do |n|
+    "MyText #{n}"
+  end
+
   factory :task do
-    description { 'MyText' }
-    expiration_time { '2019-10-27 18:43:50' }
+    description
+    expiration_time { Time.now + 1.year }
     todo_list
 
     trait :invalid do

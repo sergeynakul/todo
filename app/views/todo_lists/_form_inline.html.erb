@@ -1,3 +1,6 @@
+<%= content_tag :div, class: 'errors', data: { todo_list_id: todo_list.id } do %>
+  <%= render 'shared/errors', resource: todo_list %>
+<% end %>
 <%= form_with model: todo_list,
               class: todo_list.persisted? ? 'form-inline form-inline-update hide' : 'form-inline form-inline-create',
               data: { todo_list_id: todo_list.id } do |form| %>

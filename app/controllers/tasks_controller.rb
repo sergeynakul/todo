@@ -1,36 +1,19 @@
 class TasksController < ApplicationController
-  before_action :set_todo_list, only: %i[new create]
-  before_action :set_task, only: %i[show edit update destroy]
-  before_action :check_author, only: %i[show edit update destroy]
-
-  def show; end
-
-  def new
-    @task = Task.new
-  end
-
-  def edit; end
+  before_action :set_todo_list, only: :create
+  before_action :set_task, only: %i[update destroy]
+  before_action :check_author, only: %i[update destroy]
 
   def create
     @task = @todo_list.tasks.new(task_params)
-    if @task.save
-      redirect_to @todo_list, notice: 'Task successfully created.'
-    else
-      render :new
-    end
+    flash.now[:notice] = 'Task successfully created.' if @task.save
   end
 
   def update
-    if @task.update(task_params)
-      redirect_to @task, notice: 'Task successfully updated.'
-    else
-      render :edit
-    end
+    flash.now[:notice] = 'Task successfully updated.' if @task.update(task_params)
   end
 
   def destroy
-    @task.destroy
-    redirect_to todo_list_path(@task.todo_list), notice: 'Task successfully deleted.'
+    flash.now[:notice] = 'Task successfully deleted.' if @task.destroy
   end
 
   private
